@@ -1,58 +1,36 @@
+import java.util.Arrays;
+
 public class MergeWithoutextraSpace {
-    public static void merge(long arr1[], long arr2[], int n, int m, long[] nums) {
+    public static void swap(long[]arr1,long[]arr2, int i, int j){
+              long temp = arr1[i] ;
+              arr1[i] =arr2[j] ;
+              arr2[j]= temp ;
+    }
+    public static void merge(long arr1[], long arr2[], int n, int m) {
+          int i=0 ;
+          int j=0 ;
 
-       // long[] nums= new long[n+m] ;
-
-        int i=0;
-        int j=0 ;
-        int k=0 ;
-        int p=0 ;
-        long[]num= new long[n+m-1] ;
-
-        while(i<n && j<m){
-            if(arr1[i]<=arr2[j]){
-                
-                num[k++]= arr1[i] ;
-
-                i++ ;
-            }
-            else if(arr2[j]<arr1[i]){
-                num[k++]= arr2[j] ;
-                j++;
-
-            }
-        }
-        if(i < n-1 ){
-            while(i != n-1){
-                arr1[k++] =arr1[i++] ;
-                i++ ;
-            }
-        }
-        else if(j < m-1){
-            while(j != m-1){
-                arr2[k++] =arr2[j] ;
-                j++ ;
-            }
-        }
-        int x=0 ;
-        while (x<n){
-            arr1[x++] =num[p];
-            p++ ;
-        }
-        int y=0 ;
-        while(y<m){
-            arr2[y] =num[p++] ;
-        }
+          while(i<n && j<m){
+              if(arr1[i]<arr2[j]){
+                  i++ ;
+              }
+              else if(arr1[i]>arr2[j]){
+                  swap(arr1,arr2,i,j)  ;
+                  j++ ;
+              }
+          }
+        Arrays.sort(arr2) ;
     }
     public static void main(String[] args) {
         long[]arr1= {1,3,5,7} ;
         long[]arr2= {0,2,6,8,9};
         int n= arr1.length ;
         int m= arr2.length ;
-        long nums[]= new long [n+m] ;
-       merge(arr1, arr2, n, m,nums);
-       for( int i=0; i<(n+m)-1; i++){
-           System.out.println(nums[i]);
-       }
+        merge(arr1,arr2,n,m);
+//        long nums[]= new long [n+m] ;
+//       merge(arr1, arr2, n, m,nums);
+//       for( int i=0; i<(n+m)-1; i++){
+//           System.out.println(nums[i]);
+//       }
     }
 }
